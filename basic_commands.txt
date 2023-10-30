@@ -1,0 +1,222 @@
+----------------
+- Getting help -
+----------------
+
+whatis command_name
+-> Describes a command in a single line.
+
+man command_name
+-> Displays the command's manual.
+
+apropos string_to_search
+-> Searches the manual descriptions for a specified word.
+
+apropos -a word1 word2
+-> Searches the manual descriptions for multiple words.
+
+-------------------------------------------------------------
+- (APT) CLI Package Manager for Debian-based distributions  -
+-------------------------------------------------------------
+
+apt
+apt install package_name
+apt remove package_name
+apt list --installed
+
+clear
+
+echo "My text"
+echo 'My text'
+echo My text
+ 
+expr 1 * 2
+-> Works only with integers and outputs only integers.
+-> Consider spaces between the operators. 
+
+# Navigating the file system
+
+pwd
+ls
+ls dir_path
+cd
+
+cd /home/analyst
+-> Go to a directory using a full path.
+
+cd ./logs
+-> Go to a directory based on the current directory path.
+
+cd ../dir
+-> Go back to the parent directory of the current one, then go to the 'dir' directory. 
+
+---------------------------
+- Displaying file content -
+---------------------------
+
+cat
+-> display a whole file content.
+
+head
+-> Displays the first 10 lines of a file by default.
+
+head -n 20
+
+tail
+-> Displays the last 10 lines of a file by default.
+
+less
+-> Display the content of a file page by page.
+- space: next page.
+- b: previous page.
+- Down arrow: move forward one line.
+- Up arrow: move back one line.
+- q: quit and retun to the previous terminal window.
+
+----------------------
+- Output redirection -
+----------------------
+
+# Piping using |
+
+cat file_name | grep text
+-> Take the standard output from the first command, then pass it as a standard inut to the second command.
+
+# >
+echo "text" > file_name
+-> Outputs text to a file.
+-> It overwrites the file content.
+-> It creates the file if not exist.
+
+# >>
+echo "text" > file_name
+-> Appends to the file without overwriting it.
+
+----------------------------------------------------------
+- Navigate and filter for information in the file system -
+----------------------------------------------------------
+
+# Managing files
+
+grep text_to_find file_name
+-> Used for filtering file content searching for specific text.
+
+# Searching for directories and files
+
+find /home/analyst -name "specific_name"
+find /home/analyst -name "*part_of_the_name*"
+find /home/analyst -iname "*part_of_the_name*"
+find /home/analyst -mtime -1
+-> Find all files and directories have been modified since the last 1 day.
+find /home/analyst -mtime +1
+-> Find all files and directories have been modified since more than 1 day.
+find /home/analyst -mmin -1
+-> Find all files and directories have been modified since the last 1 minute.
+
+-----------------------------------------------
+- Creating and managing files and directories -
+-----------------------------------------------
+
+# Directories
+mkdir dir_name
+rmdir empty_dir
+
+# Files
+touch file_name
+rm empty_file
+
+cp file_or_dir /destination
+
+mv file_or_dir new_location/new_name 
+-> Moves and renames files and directories. 
+
+nano file_name
+-> Opens an existing file to edit or creates it if not exist.
+- Ctrl + o: save updates.
+- Ctrl + x: exit
+
+---------------
+- Permissions -
+---------------
+
+ls -al
+-> Display all files with their permissions.
+
+chmod g+rx,o-w file_or_dir_name
+-> u: user, g: group, o: other, and a: all.
+-> +: add, and -: remove.
+-> r: read, w: write, and x: execute.
+
+chmod u=r, g=r, o=r file_or_dir_name
+-> =: overwrites all previous permissions and add specific permissions.
+
+Directory permissions:
+-> r:
+-> w: Creates files only.
+-> x: Reads + Writes to the file content only (Doesn't list the directory contents).
+-> r-x: Lists the directory contents, read the file content, and write to it.
+
+---------
+- Users -
+---------
+
+whoami
+-> Displays the current user's username.
+
+# useradd
+
+sudo useradd salesrep7
+-> Adds a new user.
+-> Available only for the root user or users with sudo previleges.
+
+sudo useradd -g security amr
+-> Creates a new user and adds it to the primary group 'security'.
+
+sudo useradd -G finance,admin amr
+-> Creates a new user and adds it to a supplemental group(s).
+
+# usermod
+
+sudo usermod ...
+-> Modifies a user
+
+sudo usermod -g group_name username
+-> Adds a primary group to an existing user.
+
+sudo usermod -G group_name username
+-> Adds(overwrites) a suplemental group(s) to an existing user.
+
+sudo usermod -a -G group_name username
+-> Apends a suplemental group(s) to an existing user.
+
+sudo usermod -d /home/new_dir username
+-> Chnages the user's home directory.
+
+sudo usermod -l login_name username
+-> Changes the user's login name.
+
+sudo usermod -L username
+-> Locks the account so the user can't login.
+
+# userdel
+
+sudo userdel salesrep7
+-> Deletes a user's account, but leaves its files.
+-> Available only for the root user or users with sudo privileges.
+
+sudo userdel -r username
+-> Deletes a user's account and all its files in the /home/username directory.
+
+# groupdel
+
+sudo groupdel group_name
+-> With every new user account created, a new group with the same name is created.
+-> It's a good practice to delete it once its only user is deleted.
+
+# chown
+
+sudo chown
+-> Changes the ownership of a file or a directory to a new user or group.
+
+sudo chown new_user file_or_dir
+
+sudo chown :new_group file_or_dir
