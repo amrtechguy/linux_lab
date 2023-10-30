@@ -1,2 +1,2 @@
-# linux_cheatsheet
+# Linux Lab
 This is my reference to Linux.
